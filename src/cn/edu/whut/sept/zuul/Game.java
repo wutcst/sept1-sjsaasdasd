@@ -35,6 +35,7 @@ public class Game
         Room outside, theater, pub, lab, office;
 
         // create the rooms
+        //首先初始化房间的描述
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
@@ -42,6 +43,7 @@ public class Game
         office = new Room("in the computing admin office");
 
         // initialise room exits
+        //初始化房间的分布
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
@@ -67,10 +69,13 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
+        //进入主要的命令循环
 
         boolean finished = false;
         while (! finished) {
+            //开始读入指令
             Command command = parser.getCommand();
+            //运行指令
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
@@ -96,14 +101,16 @@ public class Game
      */
     private boolean processCommand(Command command)
     {
-        boolean wantToQuit = false;
-
+        boolean wantToQuit = false;//退出程序的标识符
+        //首先判断是否是未知语句
         if(command.isUnknown()) {
+            //输出相应提示退出
             System.out.println("I don't know what you mean...");
             return false;
         }
 
-        String commandWord = command.getCommandWord();
+        String commandWord = command.getCommandWord();//在这里返回首命令
+        //根据读取到的命令不同进行不同操作
         if (commandWord.equals("help")) {
             printHelp();
         }

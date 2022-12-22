@@ -6,11 +6,14 @@ import java.util.HashMap;
 public class Room
 {
     private String description;
-    private HashMap<String, Room> exits;
 
+    private HashMap<String, Room> exits;//储存<方位，房间>
+
+    //关于描述的构造函数
     public Room(String description)
     {
         this.description = description;
+        //初始化hash表
         exits = new HashMap<>();
     }
 
@@ -29,6 +32,7 @@ public class Room
         return "You are " + description + ".\n" + getExitString();
     }
 
+    //返回可以到达的方向
     private String getExitString()
     {
         String returnString = "Exits:";
@@ -38,7 +42,7 @@ public class Room
         }
         return returnString;
     }
-
+    //相邻房间查找
     public Room getExit(String direction)
     {
         return exits.get(direction);
