@@ -56,7 +56,7 @@ public class Game {
   }
 
   /**
-   *  游戏主控循环，直到用户输入退出命令后结束整个程序.
+   * 游戏主控循环，直到用户输入退出命令后结束整个程序.
    */
   public void play() {
     printWelcome();
@@ -67,10 +67,10 @@ public class Game {
 
     boolean finished = false;
     while (!finished) {
-
-      Command command = parser.getCommand(); //开始读入指令
-
-      finished = processCommand(command);//运行指令
+      //开始读入指令
+      Command command = parser.getCommand();
+      //运行指令
+      finished = processCommand(command);
     }
     System.out.println("Thank you for playing.  Good bye.");
   }
@@ -89,6 +89,7 @@ public class Game {
 
   /**
    * 执行用户输入的游戏指令.
+   *
    * @param command 待处理的游戏指令，由解析器从用户输入内容生成.
    * @return 如果执行的是游戏结束指令，则返回true，否则返回false.
    */
@@ -117,8 +118,7 @@ public class Game {
   // implementations of user commands:
 
   /**
-   * 执行help指令，在终端打印游戏帮助信息.
-   * 此处会输出游戏中用户可以输入的命令列表
+   * 执行help指令，在终端打印游戏帮助信息. 此处会输出游戏中用户可以输入的命令列表
    */
   private void printHelp() {
     System.out.println("You are lost. You are alone. You wander");
@@ -129,8 +129,7 @@ public class Game {
   }
 
   /**
-   * 执行go指令，向房间的指定方向出口移动，如果该出口连接了另一个房间，则会进入该房间，
-   * 否则打印输出错误提示信息.
+   * 执行go指令，向房间的指定方向出口移动，如果该出口连接了另一个房间，则会进入该房间， 否则打印输出错误提示信息.
    */
   private void goRoom(Command command) {
     if (!command.hasSecondWord()) {
@@ -154,6 +153,7 @@ public class Game {
 
   /**
    * 执行Quit指令，用户退出游戏。如果用户在命令中输入了其他参数，则进一步询问用户是否真的退出.
+   *
    * @return 如果游戏需要退出则返回true，否则返回false.
    */
   private boolean quit(Command command) {
