@@ -2,8 +2,8 @@ package cn.edu.whut.sept.zuul;
 
 public class Command
 {
-    private final String commandWord;
-    private final String secondWord;
+    private String commandWord;
+    private String secondWord;
 
     public Command(String firstWord, String secondWord)
     {

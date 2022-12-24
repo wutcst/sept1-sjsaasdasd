@@ -15,7 +15,7 @@ package cn.edu.whut.sept.zuul;
 
 public class Game
 {
-    private final Parser parser;
+    private Parser parser;
     private Room currentRoom;
 
     /**

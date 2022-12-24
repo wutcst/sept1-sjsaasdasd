@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Parser
 {
-    private final CommandWords commands;
-    private final Scanner reader;
+    private CommandWords commands;
+    private Scanner reader;
 
     public Parser()
     {
