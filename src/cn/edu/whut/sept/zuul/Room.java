@@ -8,8 +8,9 @@ public class Room
     private String description;
     private HashMap<String, Room> exits;
 
-    public Room(String description)
-    {
+
+
+    public Room(String description) {
         this.description = description;
         exits = new HashMap<>();
     }
@@ -29,8 +30,8 @@ public class Room
         return "You are " + description + ".\n" + getExitString();
     }
 
-    private String getExitString()
-    {
+
+    private String getExitString() {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
@@ -39,8 +40,8 @@ public class Room
         return returnString;
     }
 
-    public Room getExit(String direction)
-    {
+
+    public Room getExit(String direction) {
         return exits.get(direction);
     }
 }

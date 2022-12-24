@@ -13,10 +13,11 @@
  */
 package cn.edu.whut.sept.zuul;
 
-public class Game
-{
-    private Parser parser;
-    private Room currentRoom;
+
+public class Game {
+
+  private Parser parser;
+  private Room currentRoom;
 
     /**
      * 创建游戏并初始化内部数据和解析器.
