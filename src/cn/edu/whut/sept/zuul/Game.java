@@ -57,19 +57,17 @@ public class Game {
 
   /**
    * 游戏主控循环，直到用户输入退出命令后结束整个程序.
+   * 以finished控制循环，反复进行读指令、运行指令的动作
    */
   public void play() {
     printWelcome();
 
     // Enter the main command loop.  Here we repeatedly read commands and
     // execute them until the game is over.
-    //进入主要的命令循环
 
     boolean finished = false;
     while (!finished) {
-      //开始读入指令
       Command command = parser.getCommand();
-      //运行指令
       finished = processCommand(command);
     }
     System.out.println("Thank you for playing.  Good bye.");
@@ -94,16 +92,13 @@ public class Game {
    * @return 如果执行的是游戏结束指令，则返回true，否则返回false.
    */
   private boolean processCommand(Command command) {
-    boolean wantToQuit = false;//退出程序的标识符
-    //首先判断是否是未知语句
+    boolean wantToQuit = false;
     if (command.isUnknown()) {
-      //输出相应提示退出
       System.out.println("I don't know what you mean...");
       return false;
     }
 
-    String commandWord = command.getCommandWord();//在这里返回首命令
-    //根据读取到的命令不同进行不同操作
+    String commandWord = command.getCommandWord();
     if (commandWord.equals("help")) {
       printHelp();
     } else if (commandWord.equals("go")) {

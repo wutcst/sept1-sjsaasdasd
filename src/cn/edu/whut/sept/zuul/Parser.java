@@ -8,7 +8,6 @@ public class Parser {
     private Scanner reader;
 
     public Parser() {
-        //初始化命令集
         commands = new CommandWords();
         reader = new Scanner(System.in);
     }
@@ -19,7 +18,6 @@ public class Parser {
         String word2 = null;
 
         System.out.print("> ");
-        //读入输入行
         inputLine = reader.nextLine();
 
         Scanner tokenizer = new Scanner(inputLine);
