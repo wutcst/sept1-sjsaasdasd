@@ -5,9 +5,9 @@ import java.util.HashMap;
 
 public class Room
 {
-    private String description;
+    private final String description;
 
-    private HashMap<String, Room> exits;//储存<方位，房间>
+    private final HashMap<String, Room> exits;//储存<方位，房间>
 
     //关于描述的构造函数
     public Room(String description)
