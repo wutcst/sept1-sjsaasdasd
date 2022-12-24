@@ -1,30 +1,28 @@
 package cn.edu.whut.sept.zuul;
 
-public class CommandWords
-{
-    private static final String[] validCommands = {
-            "go", "quit", "help"
-    };
+public class CommandWords {
 
-    public CommandWords()
-    {
-        // nothing to do at the moment...
-    }
+  private static final String[] validCommands = {
+      "go", "quit", "help"
+  };
 
-    public boolean isCommand(String aString)
-    {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
-        }
-        return false;
-    }
+  public CommandWords() {
+    // nothing to do at the moment...
+  }
 
-    public void showAll()
-    {
-        for(String command: validCommands) {
-            System.out.print(command + "  ");
-        }
-        System.out.println();
+  public boolean isCommand(String aString) {
+    for (int i = 0; i < validCommands.length; i++) {
+      if (validCommands[i].equals(aString)) {
+        return true;
+      }
     }
+    return false;
+  }
+
+  public void showAll() {
+    for (String command : validCommands) {
+      System.out.print(command + "  ");
+    }
+    System.out.println();
+  }
 }
