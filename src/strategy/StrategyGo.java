@@ -10,6 +10,7 @@ public class StrategyGo extends Strategy {
     private Game game = getGame();
 
     public StrategyGo(Command command, Game game) {
+
         super(command, game);
     }
 
@@ -28,9 +29,7 @@ public class StrategyGo extends Strategy {
 
         if (nextRoom==null) {
             System.out.println("There is no door!");
-        }
-        // 切换房间
-        else {
+        } else { // 切换房间
             game.setCurrentRoom(nextRoom);
             System.out.println(game.getCurrentRoom().getLongDescription());
         }
