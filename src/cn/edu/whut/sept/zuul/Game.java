@@ -14,6 +14,11 @@
 package cn.edu.whut.sept.zuul;
 
 
+import strategy.Context;
+import strategy.StrategyGo;
+import strategy.StrategyHelp;
+import strategy.StrategyQuit;
+
 public class Game {
 
   private Parser parser;
@@ -103,7 +108,13 @@ public class Game {
             System.out.println("I don't know what you mean...");
             return false;
         }
+        switch(command.getCommandWord()){
+            case "help": new Context(new StrategyHelp(command,this)).getResult();break;
+            case "go": new Context(new StrategyGo(command,this)).getResult();break;
+            case "quit": wantToQuit=(boolean)new Context(new StrategyQuit(command,this)).getResult();break;
 
+        }
+        /*
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help")) {
             printHelp();
@@ -114,6 +125,8 @@ public class Game {
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        * */
+
         // else command not recognised.
         return wantToQuit;
     }
@@ -172,5 +185,17 @@ public class Game {
         else {
             return true;  // signal that we want to quit
         }
+    }
+
+    public Parser getParser() {
+        return this.parser;
+    }
+
+    public Room getCurrentRoom() {
+        return this.currentRoom;
+    }
+
+    public void setCurrentRoom(Room nextRoom) {
+        this.currentRoom=nextRoom;
     }
 }
