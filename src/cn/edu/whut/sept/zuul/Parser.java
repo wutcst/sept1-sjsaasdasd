@@ -2,8 +2,7 @@ package cn.edu.whut.sept.zuul;
 
 import java.util.Scanner;
 
-public class Parser
-{
+public class Parser {
     private CommandWords commands;
     private Scanner reader;
 
@@ -13,8 +12,7 @@ public class Parser
         reader = new Scanner(System.in);
     }
 
-    public Command getCommand()
-    {
+    public Command getCommand() {
         String inputLine;
         String word1 = null;
         String word2 = null;
@@ -24,23 +22,21 @@ public class Parser
         inputLine = reader.nextLine();
 
         Scanner tokenizer = new Scanner(inputLine);
-        if(tokenizer.hasNext()) {
-            word1 = tokenizer.next();   
-            if(tokenizer.hasNext()) {
+        if (tokenizer.hasNext()) {
+            word1 = tokenizer.next();
+            if (tokenizer.hasNext()) {
                 word2 = tokenizer.next();
             }
         }
 
-        if(commands.isCommand(word1)) {
+        if (commands.isCommand(word1)) {
             return new Command(word1, word2);
-        }
-        else {
+        } else {
             return new Command(null, word2);
         }
     }
 
-    public void showCommands()
-    {
+    public void showCommands() {
         commands.showAll();
     }
 }
