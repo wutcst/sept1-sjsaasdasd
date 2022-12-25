@@ -6,11 +6,11 @@ package strategy;
 public class Context {
     private Strategy strategy;
 
-    public Context(Strategy strategy) {
+    public Context(Strategy strategy){
         this.strategy = strategy;
     }
 
-    public Object getResult() {
+    public Object getResult(){
         return strategy.copeWithCommand();
     }
 }

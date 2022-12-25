@@ -27,9 +27,9 @@ public class StrategyGo extends Strategy {
         // 尝试离开当前房间,前往新房间
         Room nextRoom = game.getCurrentRoom().getExit(direction);
 
-        if (nextRoom==null) {
+        if (nextRoom == null)  {
             System.out.println("There is no door!");
-        } else { // 切换房间
+        } else  { // 切换房间
             game.setCurrentRoom(nextRoom);
             System.out.println(game.getCurrentRoom().getLongDescription());
         }

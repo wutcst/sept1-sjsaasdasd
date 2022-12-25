@@ -7,19 +7,19 @@ public abstract class Strategy {
     private Command command = null;
     private Game game = null;
 
-    public Strategy(Command command, Game game) {
-        this.command = command;
-        this.game = game;
-    }
-
-    public Command getCommand() {
+    public Command getCommand(){
 
         return this.command;
     }
 
-    public Game getGame() {
+    public Game getGame(){
 
         return this.game;
+    }
+
+    public Strategy(Command command,Game game) {
+        this.command = command;
+        this.game = game;
     }
 
     public abstract Object copeWithCommand();
