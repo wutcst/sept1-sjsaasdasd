@@ -3,12 +3,12 @@ package strategy;
 import cn.edu.whut.sept.zuul.Command;
 import cn.edu.whut.sept.zuul.Game;
 
-public class StrategyHelp extends Strategy{
+public class StrategyHelp extends Strategy {
     private Game game = null;
 
-    public StrategyHelp(Command command, Game game) {
-        super(command,game);
-        this.game=game;
+    public StrategyHelp(Command command1, Game game1) {
+        super(command1, game1);
+        this.game = game1;
     }
 
     @Override
