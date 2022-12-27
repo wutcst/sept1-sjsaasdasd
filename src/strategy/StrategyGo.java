@@ -3,6 +3,7 @@ package strategy;
 import cn.edu.whut.sept.zuul.Command;
 import cn.edu.whut.sept.zuul.Game;
 import cn.edu.whut.sept.zuul.Room;
+import room.Absroom;
 
 public class StrategyGo extends Strategy {
     /**
@@ -34,16 +35,25 @@ public class StrategyGo extends Strategy {
         }
 
         String direction = command.getSecondWord();
-
-        // 尝试离开当前房间,前往新房间
-        Room nextRoom = game.getCurrentRoom().getExit(direction);
-
-        if (nextRoom==null) {
-            System.out.println("There is no door!");
-        } else { // 切换房间
-            game.setCurrentRoom(nextRoom);
+        if(direction.equals("start")){
+            game.setCurrentRoom(game.getStartRoom());
+            game.setLastRoom(null);
             System.out.println(game.getCurrentRoom().getLongDescription());
+        }else{
+            // 尝试离开当前房间,前往新房间
+            Absroom nextRoom = game.getCurrentRoom().getExit(direction);
+
+            if (nextRoom==null) {
+                System.out.println("There is no door!");
+            } else { // 切换房间
+                //保存上个房间
+                game.setLastRoom(game.getCurrentRoom());
+                //进入下一个房间
+                game.setCurrentRoom(nextRoom);
+                System.out.println(game.getCurrentRoom().getLongDescription());
+            }
         }
+
         return "Success moving !";
     }
 }
