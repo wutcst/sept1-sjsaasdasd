@@ -21,21 +21,21 @@ public class StrategyBack extends Strategy{
     @Override
     public Object copeWithCommand() {
         //判断是否有上个房间
-        if(game.getLastRoom() == null){
+        if(game.getPlayer().getLastRoom() == null){
             System.out.println("You haven't move!");
             return "default moving !";
         }
         // 尝试离开当前房间,前往新房间
-        Absroom nextRoom = game.getLastRoom();
+        Absroom nextRoom = game.getPlayer().getLastRoom();
 
         if (nextRoom==null) {
             System.out.println("There is no door!");
         } else { // 切换房间
             //保存上个房间
-            game.setLastRoom(game.getCurrentRoom());
+            game.getPlayer().setLastRoom(game.getPlayer().getCurrentRoom());
             //进入下一个房间
-            game.setCurrentRoom(nextRoom);
-            System.out.println(game.getCurrentRoom().getLongDescription());
+            game.getPlayer().setCurrentRoom(nextRoom);
+            System.out.println(game.getPlayer().getCurrentRoom().getLongDescription());
         }
         return "Success moving !";
     }

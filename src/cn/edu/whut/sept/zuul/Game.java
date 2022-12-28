@@ -17,20 +17,30 @@ package cn.edu.whut.sept.zuul;
 import room.*;
 import strategy.*;
 
+import java.util.ArrayList;
+
 public class Game {
 
     private Parser parser;
-    private Absroom currentRoom;
-    private Absroom lastRoom;
+
     private Absroom startRoom;
     //private Rroom currentRoom;
     private RoomBuilderFactory factory;
+    //游戏玩家类
+    private Player Player=null;
+
+
+
+    //保存生成的房间
+    private  ArrayList<Absroom> RoomList=null;
     /**
      * 创建游戏并初始化内部数据和解析器.
      */
     public Game() {
-        createRooms();
+        RoomList=new ArrayList<>();
+        Player=new Player();
         parser = new Parser();
+        createRooms();
     }
 
     /**
@@ -47,7 +57,7 @@ public class Game {
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
         */
-
+        //创建普通房间
         factory = new OutsideBuilder();
         Absroom outside = factory.createRoom();
         factory = new TheaterBuilder();
@@ -58,12 +68,16 @@ public class Game {
         Absroom lab= factory.createRoom();
         factory = new OfficeBuilder();
         Absroom office= factory.createRoom();
+        //创建随机传送房间
+        factory = new TransRoomBuilder();
+        Absroom transfer= factory.createRoom();
         // initialise room exits
         outside.setExit("east", theater);
         outside.setExit("south", lab);
         outside.setExit("west", pub);
 
         theater.setExit("west", outside);
+        theater.setExit("south",transfer);
 
         pub.setExit("east", outside);
 
@@ -72,8 +86,17 @@ public class Game {
 
         office.setExit("west", lab);
 
+        transfer.setExit("north",theater);
+        //将创建好的Rooms加入List，不需要加入随机房间
+        this.RoomList.add(outside);
+        this.RoomList.add(theater);
+        this.RoomList.add(pub);
+        this.RoomList.add(lab);
+        this.RoomList.add(office);
         startRoom=outside;
-        currentRoom = outside;  // start game outside
+
+        this.Player.setCurrentRoom(outside);
+        //currentRoom = outside;  // start game outside
     }
 
     /**
@@ -102,7 +125,7 @@ public class Game {
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(Player.getCurrentRoom().getLongDescription());
     }
 
     /**
@@ -155,47 +178,12 @@ public class Game {
 
     // implementations of user commands:
 
-    /**
-     * 执行help指令，在终端打印游戏帮助信息.
-     * 此处会输出游戏中用户可以输入的命令列表
-     */
-    private void printHelp() {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
-        parser.showCommands();
-    }
-
-    /**
-     * 执行go指令，向房间的指定方向出口移动，如果该出口连接了另一个房间，则会进入该房间，
-     * 否则打印输出错误提示信息.
-     */
-    /*private void goRoom(Command command) {
-        if (!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom==null) {
-            System.out.println("There is no door!");
-        } else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
-        }
-    }*/
 
 
-    /**
-     * 执行Quit指令，用户退出游戏。如果用户在命令中输入了其他参数，则进一步询问用户是否真的退出.
-     * @return 如果游戏需要退出则返回true，否则返回false.
-     */
+
+
+
+
     private boolean quit(Command command) {
         if (command.hasSecondWord()) {
             System.out.println("Quit what?");
@@ -208,25 +196,19 @@ public class Game {
     public Parser getParser() {
         return this.parser;
     }
-
-    public Absroom getCurrentRoom() {
-        return this.currentRoom;
-    }
-
-    public void setCurrentRoom(Absroom nextRoom) {
-        this.currentRoom = nextRoom;
-    }
-    public Absroom getLastRoom() {
-        return this.lastRoom;
-    }
-
-    public void setLastRoom(Absroom currentRoom) {
-        this.lastRoom = currentRoom;
-    }
     public Absroom getStartRoom() {
         return this.startRoom;
     }
+    public ArrayList<Absroom> getRoomList() {
+        return RoomList;
+    }
+    public Player getPlayer() {
+        return Player;
+    }
 
+    public void setPlayer(cn.edu.whut.sept.zuul.Player player) {
+        Player = player;
+    }
     public void setStartRoom(Absroom nextRoom) {
         this.startRoom = nextRoom;
     }
