@@ -14,16 +14,17 @@
 package cn.edu.whut.sept.zuul;
 
 
-import strategy.Context;
-import strategy.StrategyGo;
-import strategy.StrategyHelp;
-import strategy.StrategyQuit;
+import room.*;
+import strategy.*;
 
 public class Game {
 
     private Parser parser;
-    private Room currentRoom;
-
+    private Absroom currentRoom;
+    private Absroom lastRoom;
+    private Absroom startRoom;
+    //private Rroom currentRoom;
+    private RoomBuilderFactory factory;
     /**
      * 创建游戏并初始化内部数据和解析器.
      */
@@ -36,15 +37,27 @@ public class Game {
      * 创建所有房间对象并连接其出口用以构建迷宫.
      */
     private void createRooms() {
-        Room outside, theater, pub, lab, office;
+        //Room outside, theater, pub, lab, office;
 
         // create the rooms
+        /*
         outside = new Room("outside the main entrance of the university");
         theater = new Room("in a lecture theater");
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        */
 
+        factory = new OutsideBuilder();
+        Absroom outside = factory.createRoom();
+        factory = new TheaterBuilder();
+        Absroom theater= factory.createRoom();
+        factory = new PubBuilder();
+        Absroom pub= factory.createRoom();
+        factory = new LabBuilder();
+        Absroom lab= factory.createRoom();
+        factory = new OfficeBuilder();
+        Absroom office= factory.createRoom();
         // initialise room exits
         outside.setExit("east", theater);
         outside.setExit("south", lab);
@@ -59,6 +72,7 @@ public class Game {
 
         office.setExit("west", lab);
 
+        startRoom=outside;
         currentRoom = outside;  // start game outside
     }
 
@@ -110,9 +124,16 @@ public class Game {
             case "go":
                 new Context(new StrategyGo(command, this)).getResult();
                 break;
+            case "look":
+                new Context(new StrategyLook(command, this)).getResult();
+                break;
+            case "back":
+                new Context(new StrategyBack(command, this)).getResult();
+                break;
             case "quit":
                 wantToQuit = (boolean) new Context(new StrategyQuit(command, this)).getResult();
                 break;
+
 
         }
         /*
@@ -150,7 +171,7 @@ public class Game {
      * 执行go指令，向房间的指定方向出口移动，如果该出口连接了另一个房间，则会进入该房间，
      * 否则打印输出错误提示信息.
      */
-    private void goRoom(Command command) {
+    /*private void goRoom(Command command) {
         if (!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
@@ -168,7 +189,8 @@ public class Game {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
-    }
+    }*/
+
 
     /**
      * 执行Quit指令，用户退出游戏。如果用户在命令中输入了其他参数，则进一步询问用户是否真的退出.
@@ -187,11 +209,25 @@ public class Game {
         return this.parser;
     }
 
-    public Room getCurrentRoom() {
+    public Absroom getCurrentRoom() {
         return this.currentRoom;
     }
 
-    public void setCurrentRoom(Room nextRoom) {
+    public void setCurrentRoom(Absroom nextRoom) {
         this.currentRoom = nextRoom;
+    }
+    public Absroom getLastRoom() {
+        return this.lastRoom;
+    }
+
+    public void setLastRoom(Absroom currentRoom) {
+        this.lastRoom = currentRoom;
+    }
+    public Absroom getStartRoom() {
+        return this.startRoom;
+    }
+
+    public void setStartRoom(Absroom nextRoom) {
+        this.startRoom = nextRoom;
     }
 }
