@@ -2,13 +2,13 @@ package room;
 
 import java.util.HashMap;
 
-public class CommonRoom extends Absroom{
+public class TransRoom extends Absroom{
     private int number;
-    public CommonRoom(HashMap<String, Integer> object, int num,String description){
+    public TransRoom(int num, String description){
         super();
-        this.setTransfer(false);
+        this.setTransfer(true);
         this.exits = new HashMap<>();
-        this.objects=object;
+        this.objects=new HashMap<>();
         this.number=num;
         this.setDescription(description);
     }

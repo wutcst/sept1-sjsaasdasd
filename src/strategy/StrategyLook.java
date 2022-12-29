@@ -20,7 +20,8 @@ public class StrategyLook extends Strategy{
     @Override
     public Object copeWithCommand() {
         //抽取当前房间
-        Absroom currentRoom=this.getGame().getCurrentRoom();
+        Absroom currentRoom=this.getGame().getPlayer().getCurrentRoom();
+        System.out.println(currentRoom.getShortDescription());
         currentRoom.showObjects();
         return null;
     }

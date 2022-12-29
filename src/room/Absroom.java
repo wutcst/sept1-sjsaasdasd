@@ -7,6 +7,9 @@ import java.util.Set;
  * 抽象房间类
  */
 public abstract class Absroom {
+
+
+    private boolean isTransfer;
     private String description;
     protected HashMap<String, Absroom> exits;
     protected HashMap<String,Integer> objects=null;
@@ -28,7 +31,12 @@ public abstract class Absroom {
     {
         return "You are " + description + ".\n" + getExitString();
     }
-
+    public boolean isTransfer() {
+        return isTransfer;
+    }
+    public void setTransfer(boolean transfer) {
+        isTransfer = transfer;
+    }
     private String getExitString()
     {
         String returnString = "Exits:";
