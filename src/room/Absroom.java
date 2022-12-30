@@ -52,18 +52,32 @@ public abstract class Absroom {
         return exits.get(direction);
     }
 
-    public void showObjects() {
+    public Integer showObjects() {
+        Integer totalWeight=0;
         //判断有无物品
         if(this.objects == null || this.objects.isEmpty()){
             System.out.println("Eh……There is nothing……");
         } else {
             String returnString = "Objects:";
             Set<String> keys = objects.keySet();
-            for(String exit : keys) {
-                returnString += " " + exit;
+            for(String object : keys) {
+                totalWeight+=objects.get(object);
+                returnString += " " + object;
             }
             System.out.println(returnString);
         }
+        return totalWeight;
+    }
+    public Integer getObject(String description){
+        return objects.get(description);
+    }
+
+    public void dropObject(String description) {
+        this.objects.remove(description);
+    }
+
+    public void setObject(String description, Integer weight) {
+        this.objects.put(description,weight);
     }
 }
 

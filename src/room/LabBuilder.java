@@ -9,6 +9,7 @@ public class LabBuilder implements RoomBuilderFactory{
         int number = 4;
         HashMap<String, Integer> objects = new HashMap<>();
         objects.put("computer",1);
+        objects.put("cookie",0);
         String description="in a computing lab";
         return new CommonRoom(objects, number, description);
     }
