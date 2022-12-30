@@ -12,4 +12,5 @@ public class CommonRoom extends Absroom{
         this.number=num;
         this.setDescription(description);
     }
+
 }

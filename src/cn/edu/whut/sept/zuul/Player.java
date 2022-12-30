@@ -3,6 +3,7 @@ package cn.edu.whut.sept.zuul;
 import room.Absroom;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public class Player {
     private Absroom currentRoom;
@@ -44,4 +45,45 @@ public class Player {
         this.lastRoom = lastRoom;
     }
 
+    public boolean isOverWeight(Integer weight) {
+        Set<String> keys=baggage.keySet();
+        Integer totalWeight=0;
+        for(String object:keys){
+            totalWeight+=baggage.get(object);
+        }
+        totalWeight+=weight;
+        if(this.Maximum_load>=totalWeight){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public void setObject(String description, Integer weight) {
+        this.baggage.put(description,weight);
+    }
+
+    public Integer getObject(String description) {
+        return baggage.get(description);
+    }
+
+    public void dropObject(String description) {
+        this.baggage.remove(description);
+    }
+    public Integer showBaggage() {
+        Integer totalWeight=0;
+        //判断有无物品
+        if(this.baggage == null || this.baggage .isEmpty()){
+            System.out.println("Eh……You have nothing……");
+        } else {
+            String returnString = "Baggage:";
+            Set<String> keys = baggage .keySet();
+            for(String object : keys) {
+                totalWeight+=baggage .get(object);
+                returnString += " " + object;
+            }
+            System.out.println(returnString);
+        }
+        return totalWeight;
+    }
 }

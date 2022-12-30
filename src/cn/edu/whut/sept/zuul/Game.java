@@ -153,6 +153,18 @@ public class Game {
             case "back":
                 new Context(new StrategyBack(command, this)).getResult();
                 break;
+            case "take":
+                new Context(new StrategyTake(command, this)).getResult();
+                break;
+            case "drop":
+                new Context(new StrategyDrop(command, this)).getResult();
+                break;
+            case "item":
+                new Context(new StrategyItem(command, this)).getResult();
+                break;
+            case "eat":
+                new Context(new StrategyEat(command, this)).getResult();
+                break;
             case "quit":
                 wantToQuit = (boolean) new Context(new StrategyQuit(command, this)).getResult();
                 break;
