@@ -60,3 +60,16 @@ Strategy类
 ![图片](lookback.png)
 ![图片](Words.png)
 ![图片](Command.png)
+###
+>扩充点③增加魔法饼干和eat操作，添加take，drop物品的功能和item显示房间内物品与玩家的行李
+##
+ ![图片](eat_taek_drop_item.png)
+###
+![图片](new_action.png)
+###
+    到此为止完成功能的扩充。
+## 4. 测试设计
+    关于测试主要针对Strategy和Room两个大类进行目的在于测试关键的方法运行：
+![图片](StrategyTest.png)
+###
+![图片](RoomTest.png)
