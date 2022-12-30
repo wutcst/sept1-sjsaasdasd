@@ -18,6 +18,16 @@ class StrategyTest {
         game.processCommand(look);
         Command back=new Command("back",null);
         game.processCommand(back);
+        go=new Command("go","south");
+        game.processCommand(go);
+        Command item=new Command("item",null);
+        game.processCommand(item);
+        Command take=new Command("take","cookie");
+        game.processCommand(take);
+        Command drop=new Command("drop","cookie");
+        game.processCommand(drop);
+        Command eat=new Command("eat","cookie");
+        game.processCommand(eat);
         Command quit=new Command("quit",null);
         game.processCommand(quit);
 
