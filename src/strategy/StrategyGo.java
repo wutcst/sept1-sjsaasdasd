@@ -21,7 +21,6 @@ public class StrategyGo extends Strategy {
 
         super(command1, game1);
     }
-
     /**
      * 执行go指令，向房间的指定方向出口移动，如果该出口连接了另一个房间，则会进入该房间，
      * 否则打印输出错误提示信息.
